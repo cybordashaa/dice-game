@@ -34,6 +34,7 @@ body {
     background-color: #fff;
     box-shadow: 0px 10px 50px rgba(0, 0, 0, 0.3);
     overflow: hidden;
+    border-radius: 10px;
 }
 
 .player-0-panel,
@@ -94,6 +95,7 @@ body {
     margin: 0 auto;
     padding: 12px;
     text-align: center;
+    border-radius: 5px;
 }
 
 .player-current-label {
@@ -165,6 +167,7 @@ i {
     transform: translateX(-50%);
     height: 100px;
     box-shadow: 0px 10px 60px rgba(0, 0, 0, 0.10);
+    border-radius: 5px;
 }
 
 .winner {
