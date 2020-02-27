@@ -40,18 +40,50 @@ document.querySelector(".btn-roll").addEventListener("click", function() {
     document.getElementById("current-" + activePlayer).textContent = roundScore;
   } else {
     // 1 buusan tul toglogchiin eeljig ene hesegt solij ugnu.
-    // энэ тоглогчийн ээлжиндээ цуглуулсан оноог  0 болгоно.
-    roundScore = 0;
-    document.getElementById("current-" + activePlayer).textContent = 0;
-    // Тоглогчийн ээлжийг нөгөө тоглогч руу шилжүүлнэ
-    // хэрэв идэвхитэй тоглогч 0 байвал идэвхитэй тоглогчийг 1 болго.
-    // Үгүй бол идэвхитэй тоглогчийг 0 болго
-    activePlayer === 0 ? (activePlayer = 1) : (activePlayer = 0);
-
-    // Улаан цэгийг шилжүүлэх.
-    document.querySelector(".player-0-panel").classList.toggle("active");
-    document.querySelector(".player-1-panel").classList.toggle("active");
-    // шоог түр алга болгоно
-    diceDome.style.display = "none";
+    switchToNextPlayer();
   }
 });
+
+// HOLD Товчны эвент листенер
+
+document.querySelector(".btn-hold").addEventListener("click", function() {
+  // Уг тоглогчийн цуглуулсан ээлжийн оноог глобал оноон дээр нэмж өгнө.
+  scores[activePlayer] = scores[activePlayer] + roundScore;
+  // Дэлгэц дээр оноог нь өөрчилнө.
+  document.getElementById("score-" + activePlayer).textContent =
+    scores[activePlayer];
+  // Уг тоглогчийг хожсон эсэхийг ( score 100 -s lot) шалгах
+  if (scores[activePlayer] >= 100) {
+    // Ялагч гэсэн текстийг нэрнийх оронд гаргана.
+    document.getElementById("name-" + activePlayer).textContent = "WINNER";
+    document
+      .querySelector(".player- '" + activePlayer + "' - panel")
+      .classList.add("winner");
+    document
+      .querySelector(".player-" + activePlayer + "-panel")
+      .classList.remove("active");
+  } else {
+    // Тоглогчийн ээлжийг солино
+    switchToNextPlayer();
+  }
+});
+
+// Энэ функц нь тоглогчийн ээлжийг дараачийн тоглогч руу шилжүүлнэ.
+function switchToNextPlayer() {
+  // энэ тоглогчийн ээлжиндээ цуглуулсан оноог  0 болгоно.
+  roundScore = 0;
+  document.getElementById("current-" + activePlayer).textContent = 0;
+  // Тоглогчийн ээлжийг нөгөө тоглогч руу шилжүүлнэ
+  // хэрэв идэвхитэй тоглогч 0 байвал идэвхитэй тоглогчийг 1 болго.
+  // Үгүй бол идэвхитэй тоглогчийг 0 болго
+  activePlayer === 0 ? (activePlayer = 1) : (activePlayer = 0);
+
+  // Улаан цэгийг шилжүүлэх.
+  document.querySelector(".player-0-panel").classList.toggle("active");
+  document.querySelector(".player-1-panel").classList.toggle("active");
+  // шоог түр алга болгоно
+  diceDome.style.display = "none";
+}
+
+// шинэ тоглоом эхлүүлэх
+document.querySelector(".btn-new").addEventListener("click", function() {});
